@@ -23,6 +23,8 @@ def make_response():
     asyncio.set_event_loop(asyncio.new_event_loop())
     client = TelegramClient('test', api_id, api_hash)
     client.start()
+    # init all chats to session - without it first time don't work client.send_message(chat, 'history')
+    dialogs = client.iter_dialogs()
     # Send message "history"
     client.send_message(chat, 'history')
     id_mes = 0
